@@ -1,14 +1,14 @@
 # Project: SQL-Based Security Incident Investigation
 
-This project demonstrates the application of SQL as a core tool for technical data analysis, completed as part of the Google Cybersecurity Professional Certificate. In any technical role, we constantly dealing with massive amounts of data, and inability of filtering through that noise to find what we actually need make us stuck.
+This project demonstrates the application of SQL as a core tool for technical data analysis which I completed as part of the Google Cybersecurity Professional Certificate. In any technical role, we constantly deal with massive amounts of data, and inability of filtering through that noise to find what we actually need make us stuck.
 
 I wanted to show that I can go beyond just running basic commands and I can structure my queries to isolate specific issues, manage assets, and pull the right information out of a database under different conditions. I recently investigated a potential security incident that occurred after business hours. I used SQL queries to identify suspicious login activity and categorize employee data, surfacing patterns relevant to system security and ongoing IT updates.
 
 ---
 
-### 1. After-Hours Authentication Failure
+### 1. After Hours Authentication Failure
 
-This query is designed to pull up all the login attempts that happened after 6:00 PM and failed. To get this info, I started by selecting all the data from the `log_in_attempts` table. From there, I needed to narrow things down, so I used a `WHERE` clause combined with an `AND` operator to make sure I was only seeing the specific failures I was looking for.
+This query is designed to pull up all the login attempts that happened after 6:00 PM and failed. To get this info, I started by selecting all the data from the `log_in_attempts` table. From there I needed to narrow things down, so I used a `WHERE` clause combined with an `AND` operator to make sure I was only seeing the specific failures I was looking for.
 
 * **Filter 1:** `login_time > '18:00'` to isolate attempts after 6:00 PM.
 * **Filter 2:** `success = FALSE` to isolate only the failed attempts.
@@ -22,7 +22,7 @@ WHERE login_time > '18:00' AND success = FALSE;
 
 <img width="975" height="473" alt="image" src="https://github.com/user-attachments/assets/3d52b173-015a-4d74-841d-dea84211cd10" />
 
-### 2. Event Correlation: Time-Based Incident Scoping
+### 2. Event Correlation: Time Based Incident Scoping
 
 After a suspicious security event occurred on 2022-05-09, I realized I needed to widen my net. To get a better sense of what was happening, I decided to investigate any login activity that took place on the day of the incident and the day leading up to it.
 To do this, I wrote a SQL query to filter for login attempts that happened on those specific dates. My query starts by selecting `SELECT *` every piece of information from the `log_in_attempts` table. I then filtered my results using a `WHERE` clause and an `OR` operator, which tells the database to pull records if either condition is met.
@@ -60,4 +60,65 @@ WHERE country NOT LIKE 'MEX%';
 <img width="976" height="390" alt="image" src="https://github.com/user-attachments/assets/c3a924d6-77db-4681-9a47-69fc875641df" />
 
 By running this, I immediately cleared away the noise of normal local traffic. It left me with a small list of international logins that didn't belong. I am now checking these against our blocked IP list to see if they are actual threats.
+
+### 4. Asset Management:Target Security Patching
+
+Here I'll ensure our internal assets are hardened. Our team identified that several computers in the Marketing department need urgent security updates. I need to pinpoint exactly which machines belong to staff in the East building's marketing department to get this patch rollout started.
+
+I queried the `employees` table to pull a list of the specific devices requiring updates. Since the `office` column includes building and room numbers (like `East-170`), I used the `LIKE` operator with the `%` wildcard to grab everyone in the "East" building.
+
+* **Department Filter:** Used `department = 'Marketing'` to narrow the focus to the specific team.
+* **Building Filter:** Used `office LIKE 'East%'` to capture all offices within the East building, regardless of the specific room number.
+
+**Search Query:**
+```sql
+SELECT *
+FROM employees
+WHERE department = 'Marketing' AND office LIKE 'East%';
+```
+<img width="971" height="314" alt="image" src="https://github.com/user-attachments/assets/a5ae3141-ac36-4439-b57e-69f9bd57ee7e" />
+
+This query gave me a clean list of the three employees in the East building's Marketing department whose devices need patching. Having this targeted list makes the update process much faster than manually checking every single machine, ensuring our internal systems are protected against potential vulnerabilities.
+
+### 5. Privilege & Role Segmentation
+Following the updates in the Marketing department, our team needs to address security requirements for the Finance and Sales departments. My goal here is to pull a consolidated list of all employees within these two specific departments to prepare for the next phase of the patch rollout.
+
+To gather this data, I queried the `employees` table. Because I needed records for *either* department rather than a single specific one, I used the `WHERE` clause combined with an `OR` operator to combine both criteria into one result set.
+
+* **Criteria 1:** `department = 'Finance'` to isolate all staff within the Finance team.
+* **Criteria 2:** `department = 'Sales'` to isolate all staff within the Sales team.
+
+
+**Search Query:**
+```sql
+SELECT *
+FROM employees
+WHERE department = 'Finance' OR department = 'Sales';
+```
+<img width="975" height="341" alt="image" src="https://github.com/user-attachments/assets/e27ee0f7-21db-40d7-b316-c2ec241fcfa9" />
+
+This query efficiently returned a combined list of all employees across both departments. Having this broader view allows us to verify asset coverage across these roles, ensuring that no devices are missed as we continue our security hardening process.
+
+### 6. Step 6: Compliance Auditing: Identifying Non IT Assets
+
+In this step I need to address all devices outside of the IT department. To ensure I don't miss any endpoints during this rollout, I need to generate a comprehensive list of all staff members who fall outside the Information Technology team.
+
+I wrote a SQL query to filter the `employees` table, specifically excluding the IT department to focus purely on the non-technical staff assets.
+
+* **Filter Logic:** I used the `WHERE NOT` clause to explicitly exclude any records where the `department` is listed as 'Information Technology'.
+
+
+**Search Query:**
+```sql
+SELECT *
+FROM employees
+WHERE NOT department = 'Information Technology';
+```
+
+<img width="978" height="398" alt="image" src="https://github.com/user-attachments/assets/8f6c7117-3163-4258-8310-1acfcd286a11" />
+
+This query gave me a complete, filtered view of all non-IT staff. By isolating this group, I can now confidently proceed with the final security upgrades, knowing that all necessary departments have been identified and prepared for the maintenance window.
+
+---
+
 
