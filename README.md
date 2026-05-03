@@ -99,7 +99,7 @@ WHERE department = 'Finance' OR department = 'Sales';
 
 This query efficiently returned a combined list of all employees across both departments. Having this broader view allows us to verify asset coverage across these roles, ensuring that no devices are missed as we continue our security hardening process.
 
-### 6. Step 6: Compliance Auditing: Identifying Non IT Assets
+### 6. Compliance Auditing: Identifying Non IT Assets
 
 In this step I need to address all devices outside of the IT department. To ensure I don't miss any endpoints during this rollout, I need to generate a comprehensive list of all staff members who fall outside the Information Technology team.
 
@@ -119,8 +119,6 @@ WHERE NOT department = 'Information Technology';
 
 This query gave me a complete, filtered view of all non-IT staff. By isolating this group, I can now confidently proceed with the final security upgrades, knowing that all necessary departments have been identified and prepared for the maintenance window.
 
----
-
 ### Professional Context for Scaling to Enterprise Environments
 
 While I performed lab was performed on a static dataset to master SQL logic, in a production I would refine these queries with the following enterprise security principles:
@@ -134,5 +132,24 @@ Here I identified anomalies manually. At an enterprise level I would map these d
 #### 3. Transitioning to Real-Time Awareness
 In this lab I ran manual SQL queries on static data. In production I would convert these filters into **Correlation Rules** within a SIEM (e.g., Splunk, Microsoft Sentinel) because security threats are dynamic.
 
+### Final Summary & Report
 
+Throughout this project I’ve used SQL as a core tool to investigate security anomalies and support IT maintenance. By applying various filtering strategies specifically `AND`, `OR`, and `NOT` operators I was able to isolate specific datasets to uncover meaningful insights, such as:
+
+* **Security Analysis:** Tracking failed login attempts after business hours and identifying suspicious activity outside of authorized regions.
+* **Operational Maintenance:** Efficiently segmenting employee data by department and office location to streamline security patch rollouts.
+* **Pattern Matching:** Utilizing the `LIKE` operator and the `%` wildcard to search for flexible data patterns across large, complex tables.
+
+These methods demonstrate how SQL is essential for cybersecurity operations, allowing us to organize, evaluate, and act on massive datasets effectively. 
+
+---
+
+### Looking Ahead
+This project is part of my ongoing commitment to mastering incident response and forensic analysis. I am actively expanding this repository with new documentation and exercises. 
+
+**Connect & Explore:**
+* **GitHub:** Check out my other work, including my [**Incident Response with Splunk**](https://github.com/safayetchowdhury/Incident-Response-with-Splunk) project.
+* **LinkedIn:** I’d love to **[connect](https://www.linkedin.com/in/chowdhurysafayet/)**! If you’re working in information security or are interested in these methodologies, let's discuss how we can improve security posture together.
+
+---
 
