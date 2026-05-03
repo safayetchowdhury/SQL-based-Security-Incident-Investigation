@@ -6,7 +6,7 @@ I wanted to show that I can go beyond just running basic commands and I can stru
 
 ---
 
-### Incident 1: After-Hours Authentication Failure
+### 1. After-Hours Authentication Failure
 
 This query is designed to pull up all the login attempts that happened after 6:00 PM and failed. To get this info, I started by selecting all the data from the `log_in_attempts` table. From there, I needed to narrow things down, so I used a `WHERE` clause combined with an `AND` operator to make sure I was only seeing the specific failures I was looking for.
 
@@ -38,6 +38,26 @@ WHERE login_date = '2022-05-09' OR login_date = '2022-05-08';
 ```
 <img width="982" height="481" alt="image" src="https://github.com/user-attachments/assets/825f4fdb-40f3-45c2-92cc-5259d21a0056" />
 
+
 This query gave me a clear list of every login attempt during that 48 hour window. By looking at these side by side I could start to spot patterns like whether the same IP addresses were active on both days or if there was a sudden spike in activity right before the main event. It’s all about taking that raw, messy database data and turning it into a usable timeline.
 
+### 3. Threat Hunting: Geographical Filtering
+
+I've been tracking some suspicious login attempts, and our initial analysis shows that this activity definitely didn't originate from Mexico. To get a better handle on where these attempts were actually coming from, I needed to isolate all the login traffic that originated outside of that region.
+
+To do this, I built a SQL query to filter the `log_in_attempts` table. I started by selecting all the data so I could review the full scope of the traffic. From there, I used a `WHERE` clause combined with a `NOT` operator to exclude the specific countries we wanted to ignore.
+
+* **Condition 1:** Used `NOT LIKE 'MEX%'` to filter out any entries originating from Mexico.
+* **Wildcard usage:** Since the dataset lists Mexico in different ways (`MEX`, `MEXICO`), the `%` wildcard ensures we catch any variation starting with "MEX".
+
+**Search Query:**
+```sql
+SELECT *
+FROM log_in_attempts
+WHERE country NOT LIKE 'MEX%';
+```
+
+<img width="976" height="390" alt="image" src="https://github.com/user-attachments/assets/c3a924d6-77db-4681-9a47-69fc875641df" />
+
+By running this, I immediately cleared away the noise of normal local traffic. It left me with a small list of international logins that didn't belong. I am now checking these against our blocked IP list to see if they are actual threats.
 
