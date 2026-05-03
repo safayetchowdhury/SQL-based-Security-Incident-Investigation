@@ -121,4 +121,18 @@ This query gave me a complete, filtered view of all non-IT staff. By isolating t
 
 ---
 
+### Professional Context for Scaling to Enterprise Environments
+
+While I performed lab was performed on a static dataset to master SQL logic, in a production I would refine these queries with the following enterprise security principles:
+
+#### 1. Principle of Least Privilege (PoLP)
+In this lab, I used `SELECT *` for full visibility. In a production database, I would explicitly select only the required columns (e.g., `SELECT username, login_timestamp`). This minimizes the exposure of PII (Personally Identifiable Information) and follows the Principle of Least Privilege, reducing the "blast radius" if a query is intercepted or viewed by unauthorized personnel.
+
+#### 2. SecOps Metrics & Incident Response
+Here I identified anomalies manually. At an enterprise level I would map these detection queries to formal SecOps metrics like **MTTD (Mean Time to Detect)**. As an architect, my goal is to reduce dwell time. Tracking how quickly an anomaly is flagged by these queries helps us measure the effectiveness of our incident response program and report performance to leadership.
+
+#### 3. Transitioning to Real-Time Awareness
+In this lab I ran manual SQL queries on static data. In production I would convert these filters into **Correlation Rules** within a SIEM (e.g., Splunk, Microsoft Sentinel) because security threats are dynamic.
+
+
 
