@@ -145,11 +145,12 @@ These methods demonstrate how SQL is essential for cybersecurity operations, all
 ---
 
 ### Looking Ahead
-This project is part of my ongoing commitment to mastering incident response and forensic analysis. I am actively expanding this repository with new documentation and exercises. 
 
-**Connect & Explore:**
-* **GitHub:** Check out my other work, including my [**Incident Response with Splunk**](https://github.com/safayetchowdhury/Incident-Response-with-Splunk) project.
-* **LinkedIn:** I’d love to **[connect](https://www.linkedin.com/in/chowdhurysafayet/)**! If you’re working in information security or are interested in these methodologies, let's discuss how we can improve security posture together.
+**GitHub**: Thank you for following along! This lab is part of my ongoing commitment to mastering incident response and forensic analysis. I’m constantly adding new labs and documentation—check back soon for upcoming projects! Check out my other works below: 
+*  [**Wireshark-and-Nmap-Packet-Analysis-and-Network-Reconnaissance**](https://github.com/safayetchowdhury/Wireshark-and-Nmap-Packet-Analysis-and-Network-Reconnaissance)
+*  [**Incident Response with Splunk**](https://github.com/safayetchowdhury/Incident-Response-with-Splunk)
 
----
+  
+**LinkedIn:** I’d love to **[connect](https://www.linkedin.com/in/chowdhurysafayet/)**! If you’re working in information security or are interested in these methodologies, let's discuss how we can improve security posture together.
+
 
