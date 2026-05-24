@@ -148,6 +148,7 @@ These methods demonstrate how SQL is essential for cybersecurity operations, all
 
 **GitHub**: Thank you for following along! This lab is part of my ongoing commitment to mastering incident response and forensic analysis. I’m constantly adding new labs and documentation—check back soon for upcoming projects! Check out my other works below: 
 *  [**Wireshark-and-Nmap-Packet-Analysis-and-Network-Reconnaissance**](https://github.com/safayetchowdhury/Wireshark-and-Nmap-Packet-Analysis-and-Network-Reconnaissance)
+*  [**Penetration Testing & Forensic Audit**](https://github.com/safayetchowdhury/Penetration-Testing-Forensic-Audit-Using-Kali-Ubuntu-Metasploit)
 *  [**Incident Response with Splunk**](https://github.com/safayetchowdhury/Incident-Response-with-Splunk)
 
   
